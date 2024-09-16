@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-group input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .form-group input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .form-group .error-message {
+            color: red;
+            font-size: 14px;
+        }
+        .form-group .success-message {
+            color: green;
+            font-size: 14px;
+        }
+        .form-group button {
+            background: none;
+            border: none;
+            color: #007bff;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            text-decoration: underline;
+        }
+        .form-group .reset-password {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Login</h2>
+    <form id="loginForm">
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Log In">
+        </div>
+        <div class="form-group">
+            <button type="button" onclick="goToRegisterPage()">Register</button>
+        </div>
+        <div class="form-group reset-password">
+            <button type="button" onclick="resetPassword()">Reset Password</button>
+        </div>
+        <div id="message" class="form-group"></div>
+    </form>
+</div>
+
+<script>
+    let attempts = 0;
+
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const message = document.getElementById('message');
+
+        // Placeholder for actual credential validation
+        if (email === "" || password === "") {
+            message.textContent = "Please enter email address and password.";
+            message.className = "error-message";
+            return;
+        }
+
+        if (password !== "correctpassword") { // Replace with actual password check
+            attempts++;
+            if (attempts >= 3) {
+                message.textContent = "Attempts exceeded, please Reset the password.";
+                message.className = "error-message";
+            } else {
+                message.textContent = "Please enter valid combination of id and password.";
+                message.className = "error-message";
+            }
+            return;
+        }
+
+        // On successful login
+        message.textContent = "Login successful!";
+        message.className = "success-message";
+        window.location.href = "exam-category.html"; // Redirect to Exam Category Page
+    });
+
+    function goToRegisterPage() {
+        window.location.href = "register.html"; // Redirect to Registration Page
+    }
+
+    function resetPassword() {
+        // Placeholder for actual password reset functionality
+        alert("Password reset functionality not implemented.");
+    }
+</script>
+</body>
+</html>
